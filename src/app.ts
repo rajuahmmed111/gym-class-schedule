@@ -6,12 +6,19 @@ import { traineeRoutes } from './app/modules/trainee/trainee.Routes';
 import { trainerRoutes } from './app/modules/trainer/trainerRoutes';
 import { adminRoutes } from './app/modules/admin/adminRoutes';
 const app: Application = express();
+import cookieParser from 'cookie-parser';
 
+app.use(cookieParser());
 
 app.use(express.json());
-app.use(cors());
 
-
+app.use(
+  cors({
+    // Frontend origin URL
+    // origin: 'http://localhost:5173/',
+    credentials: true,
+  }),
+);
 
 // Routes
 app.use('/api/admin', adminRoutes);
